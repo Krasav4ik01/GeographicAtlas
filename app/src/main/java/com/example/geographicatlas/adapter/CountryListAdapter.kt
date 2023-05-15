@@ -14,71 +14,51 @@ import com.example.geographicatlas.R
 import com.example.geographicatlas.models.CountriesItem
 import com.example.geographicatlas.models.Currencies
 
-class CountryListAdapter(val activity: Activity): RecyclerView.Adapter<CountryListAdapter.MyViewHolder>() {
+class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<CountryListAdapter.CountryListViewHolder>() {
 
-    private var countryList: List<CountriesItem>? = null
+    private var countryList: List<CountriesItem> = emptyList()
 
-
-    fun setCountryList(countryList: List<CountriesItem>?) {
+    fun setCountryList(countryList: List<CountriesItem>) {
         this.countryList = countryList
+        notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CountryListAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.country_list_row, parent, false)
-
-        return MyViewHolder(view)
+        return CountryListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CountryListAdapter.MyViewHolder, position: Int) {
-        holder.bind(countryList?.get(position)!!, activity)
+    override fun onBindViewHolder(holder: CountryListViewHolder, position: Int) {
+        holder.bind(countryList[position])
     }
 
-    override fun getItemCount(): Int {
-        if(countryList == null)return 0
-        else return countryList?.size!!
-    }
+    override fun getItemCount(): Int = countryList.size
 
-    class MyViewHolder(view : View): RecyclerView.ViewHolder(view){
-        val flagImage = view.findViewById<ImageView>(R.id.flagImage)
-        val tvName = view.findViewById<TextView>(R.id.tvName)
-        val tvCapital = view.findViewById<TextView>(R.id.tvCapital)
-//        val tvRegion = view.findViewById<TextView>(R.id.tvRegion)
-        var currency = ArrayList<Currencies>()
-        fun bind(data: CountriesItem, activity: Activity) {
-            tvName.text = ""+data.name.common+""
-            tvCapital.text = ""+ data.capital +""
+    inner class CountryListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val flagImage: ImageView = view.findViewById(R.id.flagImage)
+        private val tvName: TextView = view.findViewById(R.id.tvName)
+        private val tvCapital: TextView = view.findViewById(R.id.tvCapital)
 
-            itemView.setOnClickListener{
+        fun bind(data: CountriesItem) {
+            tvName.text = data.name.common
+            tvCapital.text = ""+ data.capital
+
+            itemView.setOnClickListener {
                 val intent = Intent(activity, CountryDetailsActivity::class.java)
-
-
-                intent.putExtra("name", data.name.common)
-                intent.putExtra("flagImage", data.flags.png)
-                intent.putExtra("capital", data.capital.toString())
-                intent.putExtra("tvPostalCode", data.postalCode.toString())
-                intent.putExtra("tvPopulation", data.population.toString())
-                intent.putExtra("tvArea", data.area.toString())
-
-                intent.putExtra("tvRegion", data.region)
-
-                for (i in data.currencies.toString().toList()){
-                    if (data.currencies != null){
-                        intent.putExtra("tvCurrency", data.currencies?.toString())
-                    }
-                    else{
-                        intent.putExtra("tvCurrency", data.currencies?.toString())
-                    }
+                intent.apply {
+                    putExtra("name", data.name.common)
+                    putExtra("flagImage", data.flags.png)
+                    putExtra("capital", ""+ data.capital)
+                    putExtra("tvPostalCode", ""+ data.postalCode)
+                    putExtra("tvPopulation", ""+ data.population)
+                    putExtra("tvArea", ""+ data.area)
+                    putExtra("tvRegion", data.region)
+                    putExtra("tvCurrency", data.currencies?.toString() ?: "")
                 }
-//                val snack = "You clicked "+ data.name.common
-//                Snackbar.make(itemView, snack, Snackbar.LENGTH_SHORT).show()
                 activity.startActivity(intent)
             }
 
             Glide.with(flagImage).load(data.flags.png).into(flagImage)
-
         }
     }
 }

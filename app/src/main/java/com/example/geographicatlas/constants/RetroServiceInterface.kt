@@ -11,5 +11,5 @@ interface RetroServiceInterface {
     fun getCountryList(): Call<List<CountriesItem>>
 
     @GET("alpha/")
-    fun getCountryDetail(): Call<List<CountriesItem>>
+    fun getCountryDetails(): Call<List<CountriesItem>>
 }
