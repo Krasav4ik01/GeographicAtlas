@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.geographicatlas.CountryDetailsActivity
 import com.example.geographicatlas.R
 import com.example.geographicatlas.models.CountriesItem
 import com.example.geographicatlas.models.Currencies
@@ -50,9 +51,31 @@ class CountryListAdapter(val activity: Activity): RecyclerView.Adapter<CountryLi
             tvName.text = ""+data.name.common+""
             tvCapital.text = ""+ data.capital +""
 
+            itemView.setOnClickListener{
+                val intent = Intent(activity, CountryDetailsActivity::class.java)
 
 
+                intent.putExtra("name", data.name.common)
+                intent.putExtra("flagImage", data.flags.png)
+                intent.putExtra("capital", data.capital.toString())
+                intent.putExtra("tvPostalCode", data.postalCode.toString())
+                intent.putExtra("tvPopulation", data.population.toString())
+                intent.putExtra("tvArea", data.area.toString())
 
+                intent.putExtra("tvRegion", data.region)
+
+                for (i in data.currencies.toString().toList()){
+                    if (data.currencies != null){
+                        intent.putExtra("tvCurrency", data.currencies?.toString())
+                    }
+                    else{
+                        intent.putExtra("tvCurrency", data.currencies?.toString())
+                    }
+                }
+//                val snack = "You clicked "+ data.name.common
+//                Snackbar.make(itemView, snack, Snackbar.LENGTH_SHORT).show()
+                activity.startActivity(intent)
+            }
 
             Glide.with(flagImage).load(data.flags.png).into(flagImage)
 
