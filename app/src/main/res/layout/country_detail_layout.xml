@@ -2,91 +2,180 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-
-    android:backgroundTint="#F7F8F9"
-    android:layout_marginVertical="5dp"
     android:layout_marginHorizontal="10dp"
-    android:paddingVertical="5dp"
-    >
+
+    android:layout_marginVertical="5dp"
+    android:backgroundTint="#F7F8F9"
+    android:orientation="horizontal"
+    android:paddingVertical="5dp">
 
 
-    <ImageView android:id="@+id/detailFlagImage"
+    <ImageView
+        android:id="@+id/detailFlagImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="270dp"
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="-10dp"
         />
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@id/detailFlagImage"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/item_view_shape"
+        android:orientation="vertical"
         android:paddingVertical="20dp"
 
         >
 
-
-
-        <TextView android:id="@+id/tvDetailCapital"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
+            android:background="@drawable/item_view_shape"
             android:maxLines="3"
-            android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvCapitalCoordinates"
+            android:text="Capital:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDetailCapital"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvPopulation"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
             android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvArea"
+            android:maxLines="3"
+            android:text="Capital Coordinates:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvCapitalCoordinates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:text="Population:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvPopulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:text="Area:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+
             />
 
-                <TextView android:id="@+id/tvDetailCurrency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:maxLines="3"
-                    android:background="@drawable/item_view_shape"
-                    />
-
-        <TextView android:id="@+id/tvDetailRegion"
+        <TextView
+            android:id="@+id/tvArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/item_view_shape"
-            />
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:text="Currency:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDetailCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:text="Region:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDetailRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/item_view_shape"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/item_view_shape"
+            android:maxLines="3"
+            android:text="Timezones:"
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDetailTimeZone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/item_view_shape"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
 
     </LinearLayout>

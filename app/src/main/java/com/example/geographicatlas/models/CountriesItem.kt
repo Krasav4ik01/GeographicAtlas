@@ -13,7 +13,7 @@ data class CountriesItem(
     val cioc: String,
     val coatOfArms: CoatOfArms,
     val continents: List<String>,
-    val currencies: Currencies,
+    var currencies: HashMap<String, Currencies> = HashMap(),
     val flag: String,
     val flags: Flags,
     val languages: Languages,

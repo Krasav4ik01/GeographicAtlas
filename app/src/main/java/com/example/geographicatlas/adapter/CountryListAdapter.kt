@@ -17,6 +17,7 @@ import com.example.geographicatlas.R
 import com.example.geographicatlas.models.CountriesItem
 import com.example.geographicatlas.models.Currencies
 import com.example.geographicatlas.models.ListItem
+import kotlin.math.ceil
 
 class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -110,9 +111,35 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
         val arrowDown: ImageView = view.findViewById(R.id.arrow_down)
         fun bind(data: CountriesItem) {
             tvName.text = data.name.common
-            tvCapital.text = ""+ data.capital
-            tvPopulation.text = "Population: "+ data.population
+            if (data.capital != null){
+                val capitalList = data.capital
+                val capitalString = capitalList.joinToString(", ")
+                tvCapital.text = ""+ capitalString
+            }
+
+            tvPopulation.text = "Population: "+ ceil(data.population.toDouble()/1000000).toInt() + " mln"
             tvArea.text = "Area: "+ data.area.toInt() + " km2"
+            val stringBuilder = StringBuilder()
+            if (data.currencies.isNotEmpty())
+
+                data.currencies.keys.let {
+
+
+//                    stringBuilder.append(data.name?.common)
+
+
+
+                    for ((i, key) in it.withIndex()) {
+                        val currencyName = data.currencies[key]?.name
+                        val currencySymbol = data.currencies[key]?.symbol
+                        tvCurrency.text = "Currency: "+ currencyName + " (" + currencySymbol+")"
+
+                        if (it.size > 1 && i < it.size - 1)
+                            stringBuilder.append(" , ")
+
+                    }
+                    stringBuilder.append(".")
+                }
 
 
 

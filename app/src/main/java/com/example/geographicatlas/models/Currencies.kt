@@ -162,5 +162,7 @@ data class Currencies(
     val YER: YER,
     val ZAR: ZAR,
     val ZMW: ZMW,
-    val ZWL: ZWL
+    val ZWL: ZWL,
+    val name: String,
+    val symbol: String
 )

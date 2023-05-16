@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.geographicatlas.R
 import com.example.geographicatlas.models.CountriesItem
 import com.example.geographicatlas.models.Currencies
+import kotlin.math.ceil
 
 class CountryDetailAdapter(val activity: Activity): RecyclerView.Adapter<CountryDetailAdapter.CountryDetailViewHolder>() {
 
@@ -43,31 +44,54 @@ class CountryDetailAdapter(val activity: Activity): RecyclerView.Adapter<Country
     class CountryDetailViewHolder(view : View): RecyclerView.ViewHolder(view){
         val flagImage = view.findViewById<ImageView>(R.id.detailFlagImage)
         val tvCapital = view.findViewById<TextView>(R.id.tvDetailCapital)
-        //        val tvCapitalCoordinates = view.findViewById<TextView>(R.id.tvCapitalCoordinates)
+        val tvCapitalCoordinates = view.findViewById<TextView>(R.id.tvCapitalCoordinates)
         val tvPopulation = view.findViewById<TextView>(R.id.tvPopulation)
         val tvArea = view.findViewById<TextView>(R.id.tvArea)
         val tvCurrency = view.findViewById<TextView>(R.id.tvDetailCurrency)
         val tvRegion = view.findViewById<TextView>(R.id.tvDetailRegion)
+        val tvTimeZone = view.findViewById<TextView>(R.id.tvDetailTimeZone)
         var currency = ArrayList<Currencies>()
         fun bind(data: CountriesItem, activity: Activity) {
-            tvCapital.text = "Capital: "+ data.capital +""
-//            tvCapitalCoordinates.text = "Postal Code format: "+ data.postalCode
-            tvPopulation.text = "population: "+ data.population
-            tvArea.text = "Area: " + data.area
-            tvRegion.text = "Region: " + data.region
-            tvCurrency.text = "Currency: "+ data.currencies
-//            tvCurrency.text = "Currency: "+ data.currencies.EUR
+            val capitalList = data.capital
+            val capitalString = capitalList.joinToString(", ")
+            tvCapital.text = ""+ capitalString
+            val capCoorList = data.capitalInfo.latlng
+            val capitalCoorString = capCoorList.joinToString(", ")
+            tvCapitalCoordinates.text = ""+ capitalCoorString
+            tvPopulation.text = ""+ ceil(data.population.toDouble()/1000000).toInt() + " mln"
+            tvArea.text = "" + data.area.toInt() + " km²"
+            tvRegion.text = "" + data.region
+//            tvCurrency.text = ""+ data.currencies
+
+            val timezonesList = data.timezones
+            val timezonesString = timezonesList.joinToString(", ")
+            tvTimeZone.text = ""+ timezonesString
+
+
+            val stringBuilder = StringBuilder()
+            if (data.currencies.isNotEmpty())
+
+                data.currencies.keys.let {
+
+
+                    stringBuilder.append(data.name?.common)
 
 
 
-//            for (i in data.currencies.toString().toList()){
-//                if (data.currencies.EUR != null){
-//                    tvCurrency.text = ""+ data.currencies.EUR
-//                }
-//                else{
-//                    tvCurrency.text = ""
-//                }
-//            }
+                    for ((i, key) in it.withIndex()) {
+                        val currencyName = data.currencies[key]?.name
+                        val currencySymbol = data.currencies[key]?.symbol
+                        tvCurrency.text = currencyName + " (" + currencySymbol +")"
+
+                        if (it.size > 1 && i < it.size - 1)
+                            stringBuilder.append(" , ")
+
+                    }
+                    stringBuilder.append(".")
+                }
+
+
+
 
 
             Glide.with(flagImage).load(data.flags.png).into(flagImage)
