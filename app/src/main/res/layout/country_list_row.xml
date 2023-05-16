@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:id="@+id/listLinearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_toRightOf="@id/flagImage"
@@ -52,7 +52,7 @@
             android:textColor="@color/black"
             />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/expandableRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,8 @@
                 android:maxLines="3"
                 android:background="@drawable/item_view_shape"
                 />
-            <TextView android:id="@+id/tvPopupArea"
+            <TextView
+                android:id="@+id/tvPopupArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -76,6 +77,7 @@
                 android:textColor="@color/black"
                 android:maxLines="3"
                 android:background="@drawable/item_view_shape"
+                android:layout_below="@id/tvPopupPopulation"
                 />
             <TextView android:id="@+id/tvPopupCurrency"
                 android:layout_width="wrap_content"
@@ -85,8 +87,9 @@
                 android:textColor="@color/black"
                 android:maxLines="3"
                 android:background="@drawable/item_view_shape"
+                android:layout_below="@id/tvPopupArea"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
 
 

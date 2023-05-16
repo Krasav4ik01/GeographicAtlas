@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -63,7 +64,7 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
         private val tvPopulation: TextView = view.findViewById(R.id.tvPopupPopulation)
         private val tvArea: TextView = view.findViewById(R.id.tvPopupArea)
         private val tvCurrency: TextView = view.findViewById(R.id.tvPopupCurrency)
-        val expandableRelativeLayout: LinearLayout = view.findViewById(R.id.expandableRelativeLayout)
+        val expandableRelativeLayout: RelativeLayout = view.findViewById(R.id.expandableRelativeLayout)
         val learnMoreBtn : Button = view.findViewById(R.id.btnLearnMore)
         val arrowDown: ImageView = view.findViewById(R.id.arrow_down)
         fun bind(data: CountriesItem) {
