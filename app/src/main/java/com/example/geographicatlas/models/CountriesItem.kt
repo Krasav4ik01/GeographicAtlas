@@ -24,5 +24,6 @@ data class CountriesItem(
     val region: String,
     val subregion: String,
     val timezones: List<String>,
-    val unMember: Boolean
+    val unMember: Boolean,
+    var isExpandable: Boolean = false
 )

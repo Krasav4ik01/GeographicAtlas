@@ -5,7 +5,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -30,6 +32,26 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: CountryListViewHolder, position: Int) {
         holder.bind(countryList[position])
+
+        val isExpanded : Boolean = countryList[position].isExpandable
+
+        holder.expandableRelativeLayout.visibility = if(isExpanded) View.VISIBLE else View.GONE
+        holder.learnMoreBtn.visibility = if (isExpanded) View.VISIBLE else View.GONE
+//        holder.arrowDown.setImageResource(R.drawable.arrow_down) = if (isExpanded) holder.arrowDown.setImageResource(R.drawable.arrow_up) else holder.arrowDown.setImageResource(R.drawable.arrow_down)
+
+
+        if(isExpanded){
+            holder.arrowDown.setImageResource(R.drawable.arrow_up)
+        }
+        else{
+            holder.arrowDown.setImageResource(R.drawable.arrow_down)
+        }
+
+        holder.arrowDown.setOnClickListener {
+            val countries = countryList[position]
+            countries.isExpandable = !countries.isExpandable
+            notifyItemChanged(position)
+        }
     }
 
     override fun getItemCount(): Int = countryList.size
@@ -38,22 +60,27 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
         private val flagImage: ImageView = view.findViewById(R.id.flagImage)
         private val tvName: TextView = view.findViewById(R.id.tvName)
         private val tvCapital: TextView = view.findViewById(R.id.tvCapital)
-
+        private val tvPopulation: TextView = view.findViewById(R.id.tvPopupPopulation)
+        private val tvArea: TextView = view.findViewById(R.id.tvPopupArea)
+        private val tvCurrency: TextView = view.findViewById(R.id.tvPopupCurrency)
+        val expandableRelativeLayout: LinearLayout = view.findViewById(R.id.expandableRelativeLayout)
+        val learnMoreBtn : Button = view.findViewById(R.id.btnLearnMore)
+        val arrowDown: ImageView = view.findViewById(R.id.arrow_down)
         fun bind(data: CountriesItem) {
             tvName.text = data.name.common
             tvCapital.text = ""+ data.capital
+            tvPopulation.text = "Population: "+ data.population
+            tvArea.text = "Area: "+ data.area.toInt() + " km2"
 
-            itemView.setOnClickListener {
+
+
+
+
+            learnMoreBtn.setOnClickListener {
                 val intent = Intent(activity, CountryDetailsActivity::class.java)
                 intent.apply {
                     putExtra("name", data.name.common)
-                    putExtra("flagImage", data.flags.png)
-//                    putExtra("capital", ""+ data.capital)
-//                    putExtra("tvPostalCode", ""+ data.postalCode)
-//                    putExtra("tvPopulation", ""+ data.population)
-//                    putExtra("tvArea", ""+ data.area)
-//                    putExtra("tvRegion", data.region)
-//                    putExtra("tvCurrency", data.currencies?.toString() ?: "")
+
                     putExtra("cca2", data.cca2)
                 }
                 activity.startActivity(intent)
