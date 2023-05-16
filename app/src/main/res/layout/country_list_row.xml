@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="16sp"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:maxLines="3"
             />
 
@@ -105,10 +105,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Learn More"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:layout_below="@id/listLinearLayout"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
+        android:backgroundTint="#F7F8F9"
+        android:textColor="#8A1697"
+        android:layout_marginVertical="10dp"
         />
 
     <ImageView

@@ -69,12 +69,14 @@ class CountryDetailAdapter(val activity: Activity): RecyclerView.Adapter<Country
 
 
             val stringBuilder = StringBuilder()
-            if (data.currencies.isNotEmpty())
+            if (data.currencies.isNotEmpty()){
+
+
 
                 data.currencies.keys.let {
 
 
-                    stringBuilder.append(data.name?.common)
+//                    stringBuilder.append(data.name?.common)
 
 
 
@@ -89,6 +91,10 @@ class CountryDetailAdapter(val activity: Activity): RecyclerView.Adapter<Country
                     }
                     stringBuilder.append(".")
                 }
+            }
+            else{
+                tvCurrency.text = ""
+            }
 
 
 

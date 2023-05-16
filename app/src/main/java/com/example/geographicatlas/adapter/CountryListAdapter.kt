@@ -120,7 +120,9 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
             tvPopulation.text = "Population: "+ ceil(data.population.toDouble()/1000000).toInt() + " mln"
             tvArea.text = "Area: "+ data.area.toInt() + " km2"
             val stringBuilder = StringBuilder()
-            if (data.currencies.isNotEmpty())
+            if (data.currencies.isNotEmpty()){
+
+
 
                 data.currencies.keys.let {
 
@@ -140,6 +142,10 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
                     }
                     stringBuilder.append(".")
                 }
+            }
+            else{
+                tvCurrency.text = ""
+            }
 
 
 
