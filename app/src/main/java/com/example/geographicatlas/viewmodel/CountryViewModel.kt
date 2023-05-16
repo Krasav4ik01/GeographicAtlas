@@ -40,4 +40,22 @@ class CountryViewModel: ViewModel()  {
 
 
     }
+
+    fun makeAPICallForCountryDetails(cca2: String){
+        val retroInstance = Constants.getRetroInstance()
+        val retroService  = retroInstance.create(RetroServiceInterface::class.java)
+        val call  = retroService.getCountryDetail(cca2)
+        call.enqueue(object : Callback<List<CountriesItem>> {
+            override fun onFailure(call: Call<List<CountriesItem>>, t: Throwable) {
+                liveDataList.postValue(null)
+            }
+
+            override fun onResponse(
+                call: Call<List<CountriesItem>>,
+                response: Response<List<CountriesItem>>
+            ) {
+                liveDataList.postValue(response.body())
+            }
+        })
+    }
 }

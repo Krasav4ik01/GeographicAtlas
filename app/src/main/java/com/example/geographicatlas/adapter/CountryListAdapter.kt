@@ -48,12 +48,13 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
                 intent.apply {
                     putExtra("name", data.name.common)
                     putExtra("flagImage", data.flags.png)
-                    putExtra("capital", ""+ data.capital)
-                    putExtra("tvPostalCode", ""+ data.postalCode)
-                    putExtra("tvPopulation", ""+ data.population)
-                    putExtra("tvArea", ""+ data.area)
-                    putExtra("tvRegion", data.region)
-                    putExtra("tvCurrency", data.currencies?.toString() ?: "")
+//                    putExtra("capital", ""+ data.capital)
+//                    putExtra("tvPostalCode", ""+ data.postalCode)
+//                    putExtra("tvPopulation", ""+ data.population)
+//                    putExtra("tvArea", ""+ data.area)
+//                    putExtra("tvRegion", data.region)
+//                    putExtra("tvCurrency", data.currencies?.toString() ?: "")
+                    putExtra("cca2", data.cca2)
                 }
                 activity.startActivity(intent)
             }

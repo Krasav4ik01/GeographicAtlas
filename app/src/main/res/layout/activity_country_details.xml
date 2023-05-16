@@ -14,84 +14,13 @@
 
 
 
-    <ImageView android:id="@+id/detailFlagImage"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/detailsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        />
-
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/detailFlagImage"
-        android:background="@drawable/item_view_shape"
-        android:paddingVertical="20dp"
-        android:weightSum="5"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         >
 
-
-
-        <TextView android:id="@+id/tvDetailCapital"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvCapitalCoordinates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvPopulation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvArea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:background="@drawable/item_view_shape"
-            />
-        <TextView android:id="@+id/tvCurrency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:maxLines="3"
-            android:background="@drawable/item_view_shape"
-            />
-
-        <TextView android:id="@+id/tvDetailRegion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:background="@drawable/item_view_shape"
-            />
-
-
-
-    </LinearLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
