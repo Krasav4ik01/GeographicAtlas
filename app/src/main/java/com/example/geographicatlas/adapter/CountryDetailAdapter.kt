@@ -69,29 +69,31 @@ class CountryDetailAdapter(val activity: Activity): RecyclerView.Adapter<Country
 
 
             val stringBuilder = StringBuilder()
-            if (data.currencies.isNotEmpty()){
+            if (data.currencies != null && data.currencies.isNotEmpty()) {
+                data.currencies.keys.let { keys ->
 
 
-
-                data.currencies.keys.let {
+                    data.currencies.keys.let {
 
 
 //                    stringBuilder.append(data.name?.common)
 
 
+                        for ((i, key) in it.withIndex()) {
+                            val currencyName = data.currencies[key]?.name
+                            val currencySymbol = data.currencies[key]?.symbol
+                            tvCurrency.text =
+                                "" + currencyName + " (" + currencySymbol + ")"
 
-                    for ((i, key) in it.withIndex()) {
-                        val currencyName = data.currencies[key]?.name
-                        val currencySymbol = data.currencies[key]?.symbol
-                        tvCurrency.text = currencyName + " (" + currencySymbol +")"
+                            if (it.size > 1 && i < it.size - 1)
+                                stringBuilder.append(" , ")
 
-                        if (it.size > 1 && i < it.size - 1)
-                            stringBuilder.append(" , ")
-
+                        }
+                        stringBuilder.append(".")
                     }
-                    stringBuilder.append(".")
                 }
             }
+
             else{
                 tvCurrency.text = ""
             }
