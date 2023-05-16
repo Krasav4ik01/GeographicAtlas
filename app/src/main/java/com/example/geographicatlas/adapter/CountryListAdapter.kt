@@ -16,46 +16,87 @@ import com.example.geographicatlas.CountryDetailsActivity
 import com.example.geographicatlas.R
 import com.example.geographicatlas.models.CountriesItem
 import com.example.geographicatlas.models.Currencies
+import com.example.geographicatlas.models.ListItem
 
-class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<CountryListAdapter.CountryListViewHolder>() {
+class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var countryList: List<CountriesItem> = emptyList()
+    private var itemList: List<ListItem> = emptyList()
 
     fun setCountryList(countryList: List<CountriesItem>) {
-        this.countryList = countryList
+        val groupedMap = countryList.groupBy { it.region }.toSortedMap()
+//        val sortedMap = groupedMap.toSortedMap()
+        val itemList = mutableListOf<ListItem>()
+
+        for ((region, countries) in groupedMap) {
+            itemList.add(ListItem.HeaderItem(region))
+            for (country in countries) {
+                itemList.add(ListItem.CountryItem(country))
+            }
+        }
+
+        this.itemList = itemList
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.country_list_row, parent, false)
-        return CountryListViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: CountryListViewHolder, position: Int) {
-        holder.bind(countryList[position])
-
-        val isExpanded : Boolean = countryList[position].isExpandable
-
-        holder.expandableRelativeLayout.visibility = if(isExpanded) View.VISIBLE else View.GONE
-        holder.learnMoreBtn.visibility = if (isExpanded) View.VISIBLE else View.GONE
-//        holder.arrowDown.setImageResource(R.drawable.arrow_down) = if (isExpanded) holder.arrowDown.setImageResource(R.drawable.arrow_up) else holder.arrowDown.setImageResource(R.drawable.arrow_down)
-
-
-        if(isExpanded){
-            holder.arrowDown.setImageResource(R.drawable.arrow_up)
-        }
-        else{
-            holder.arrowDown.setImageResource(R.drawable.arrow_down)
-        }
-
-        holder.arrowDown.setOnClickListener {
-            val countries = countryList[position]
-            countries.isExpandable = !countries.isExpandable
-            notifyItemChanged(position)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ITEM_TYPE_COUNTRY -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.country_list_row, parent, false)
+                CountryListViewHolder(view)
+            }
+            ITEM_TYPE_HEADER -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.header_design, parent, false)
+                HeaderViewHolder(view)
+            }
+            else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 
-    override fun getItemCount(): Int = countryList.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is CountryListViewHolder -> {
+                val countryItem = itemList[position] as ListItem.CountryItem
+                holder.bind(countryItem.country)
+
+                val isExpanded: Boolean = countryItem.country.isExpandable
+
+                holder.expandableRelativeLayout.visibility =
+                    if (isExpanded) View.VISIBLE else View.GONE
+                holder.learnMoreBtn.visibility = if (isExpanded) View.VISIBLE else View.GONE
+
+                if (isExpanded) {
+                    holder.arrowDown.setImageResource(R.drawable.arrow_up)
+                } else {
+                    holder.arrowDown.setImageResource(R.drawable.arrow_down)
+                }
+
+                holder.arrowDown.setOnClickListener {
+                    val country = itemList[position] as ListItem.CountryItem
+                    country.country.isExpandable = !country.country.isExpandable
+                    notifyItemChanged(position)
+                }
+            }
+            is HeaderViewHolder -> {
+                val headerItem = itemList[position] as ListItem.HeaderItem
+                holder.bind(headerItem.region)
+            }
+            else -> throw IllegalArgumentException("Invalid view holder type")
+        }
+    }
+
+    override fun getItemCount(): Int = itemList.size
+
+    override fun getItemViewType(position: Int): Int {
+        return when (itemList[position]) {
+            is ListItem.CountryItem -> ITEM_TYPE_COUNTRY
+            is ListItem.HeaderItem -> ITEM_TYPE_HEADER
+        }
+    }
+
+    companion object {
+        private const val ITEM_TYPE_COUNTRY = 0
+        private const val ITEM_TYPE_HEADER = 1
+    }
 
     inner class CountryListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val flagImage: ImageView = view.findViewById(R.id.flagImage)
@@ -88,6 +129,13 @@ class CountryListAdapter(private val activity: Activity) : RecyclerView.Adapter<
             }
 
             Glide.with(flagImage).load(data.flags.png).into(flagImage)
+        }
+    }
+
+    inner class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val tvContinent: TextView = view.findViewById(R.id.tvContinent)
+        fun bind(data: String) {
+            tvContinent.text = data
         }
     }
 }
