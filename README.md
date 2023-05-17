@@ -7,6 +7,9 @@ https://github.com/Krasav4ik01/GeographicAtlas/assets/75470901/298f6221-cde1-4a9
 
 
 
+Advanced task: Использовал архитектуру MVVM
+
+
  Установленные библиотеки:
         
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
